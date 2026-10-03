@@ -2,19 +2,18 @@
 
 **Version 0.1.1 · 2026-10-03**
 
-Draftroom is a local markdown editor for people who want to write every word themselves and still get AI review. You type the draft. Reviewers ("perspectives") run when you click, through your own Claude and Codex logins, and leave comments anchored to your sentences: what the problem is and which way to fix it. No code path writes model output into the draft. One narrow exception exists (citation formatting, below), and it changes nothing until you accept a preview.
+Draftroom is a local markdown editor created (with the help of Claude Code) for people who want to write every word themselves and still benefit from AI review. You type every word of the draft. A set of standard AI-powered reviewers run in a side panel when you click, using your own Claude and/or Codex subscriptions, and leave comments anchored to paragraphs or sentences: what the problem is and which way to fix it. Apart from the ability to reformat footnotes or endnotes, the models can't touch your draft directly.
 
-It was built for writing essays, reports and newsletter posts where the argument and the words have to be the author's own.
+It was built for writing essays, reports and newsletter posts where you want both maximum control over your own words, and the ability to quickly harness the latest models for quick checks on wording, arguments, claims, logic etc.
 
 ## Features
 
-- **Editor.** Live-preview markdown (CodeMirror 6), a formatting toolbar, footnotes and endnotes with stable labels, images (button, paste or drag; saved in `images/` beside the draft with a caption), recent files, New draft, and a Draft mode that hides every mark.
-- **Review perspectives.** Argument (thesis, unsupported claims, leaps, consistency with your standing positions), Evidence (claims against your sources file and reference folders, quotes, footnotes, your organisation's approved positions), Line and voice (rhythm, register, clarity against your voice card, from a selection up to the whole draft) and Copy and proof (spelling, grammar, consistency). Each comment has a severity, a level and a hint that starts with a verb. Resolve or dismiss; dismissed comments stay quiet until the text changes.
-- **A guardrail on every comment.** Hints that supply replacement wording, new facts or long phrases absent from the draft are dropped or flagged before you see them. "Show an example" gives a before-and-after on an unrelated topic and has no copy button.
+- **Editor.** Live-preview markdown (CodeMirror 6), a formatting toolbar, footnotes and endnotes with stable labels, images (button, paste or drag; saved in `images/` beside the draft with a caption), recent files, New draft, and a Draft mode that hides comments and just lets you write.
+- **Review perspectives.** Standard reviewers include Argument (thesis, unsupported claims, leaps, consistency with your standing positions), Evidence (claims against your sources file and reference folders, quotes, footnotes, your organisation's approved positions), Line and voice (rhythm, register, clarity against your voice card, from a selection up to the whole draft) and Copy and proof (spelling, grammar, consistency). Each comment has a severity, a level and guidance. Resolve or dismiss; dismissed comments stay quiet until the text changes.
 - **Signals from Jev (optional).** TypeSafe's Jev returns probabilities for fixed paragraph questions (point comes late, fact without a source, over-hedged, contrast frame and others). It is off for every draft until you switch that draft on, sends only cleaned prose paragraphs, and needs your own key in `~/.draftroom/jev.key`.
 - **Citations.** Renumber notes in reading order, convert footnotes and endnotes, check every quotation word for word against its fetched or linked source, format notes in AGLC 4 or Chicago 18 through citeproc, and validate references against Crossref, OpenAlex and Unpaywall.
 - **Word import and export** through pandoc, keeping notes, tables, images and comments.
-- **Lint perspective (off in this release).** It runs a local lint script named in your profile, with no model. No script ships here, so its tab is hidden until you add one; `tests/fixtures/lint/tell-lint-stub.py` shows the interface.
+- **Lint perspective (off in this release).** It runs a local lint script named in your profile, with no model. Its tab is hidden until you add a script; `tests/fixtures/lint/tell-lint-stub.py` shows the interface.
 
 ## How it works
 
@@ -58,9 +57,9 @@ bin/draftroom path/to/draft.md   # or a folder containing draft.md
 
 Copy and proof assumes Australian spelling and style; edit `perspectives/copy-proof.md` for another.
 
-## What leaves your machine
+## How data is exposed from your machine
 
-- **Model runs:** the prompt goes to Anthropic or OpenAI through the CLI you choose, on your plan's quota.
+- **Model runs:** the prompt goes to Anthropic or OpenAI through the CLI you choose, on your plan's quota, so make sure you are comfortable with your settings.
 - **Jev:** only for drafts you switch on, only cleaned prose paragraphs plus the audience and frame.
 - **Citations:** source addresses you cite are fetched; DOIs or titles, authors and years go to Crossref, OpenAlex and Unpaywall. Draft text never goes to source hosts.
 - Word conversion runs locally.
@@ -71,11 +70,11 @@ Copy and proof assumes Australian spelling and style; edit `perspectives/copy-pr
 
 ## Who made this, and how
 
-Draftroom was designed and directed by **Nick Davis**, who uses it for his own writing. He writes about AI governance at [Principals & Agents](https://principalsandagents.substack.com).
+Draftroom was designed and directed by **Prof Nicholas Davis**, who uses it for his own writing. He writes about AI governance at [Principals & Agents](https://principalsandagents.substack.com).
 
-The code was written by **Claude Opus 5.5** (Anthropic), working in Claude Code under Nick's direction: he set the requirements and invariants, reviewed the output and tested each release. Every commit in the private development history carries a Claude Opus 5.5 co-author line. OpenAI's Codex CLI is one of the two review engines Draftroom calls at run time; it did not write the code. The reviews you get come from whichever Claude and OpenAI models your own CLIs are set to use, and the Signals tab from TypeSafe's Jev.
+The code itself was written by **Claude Opus 5.5** (Anthropic), working in Claude Code under Nick's direction: he set the requirements and invariants, reviewed the output and tested each release. Every commit in the private development history carries a Claude Opus 5.5 co-author line. OpenAI's Codex CLI is one of the two review engines Draftroom calls at run time; it did not write the code. The reviews you get come from whichever Claude and OpenAI models your own CLIs are set to use, and the Signals tab from TypeSafe's Jev.
 
-This README was generated by Claude Opus 5.5 (`claude-opus-5-5`) from the code and the private development notes, and checked by Nick before publication.
+The first version of this README was generated by Claude Opus 5.5 (`claude-opus-5-5`) from the code and the private development notes, and edited by Nick before publication.
 
 This public repository is an anonymised mirror of a private one, rebuilt on each release: personal configuration, drafts and history are left out. Issues are welcome; changes are made upstream and arrive with the next release.
 
