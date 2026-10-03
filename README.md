@@ -1,6 +1,6 @@
 # Draftroom
 
-**Version 0.1.0 · 2026-10-03**
+**Version 0.1.1 · 2026-10-03**
 
 Draftroom is a local markdown editor for people who want to write every word themselves and still get AI review. You type the draft. Reviewers ("perspectives") run when you click, through your own Claude and Codex logins, and leave comments anchored to your sentences: what the problem is and which way to fix it. No code path writes model output into the draft. One narrow exception exists (citation formatting, below), and it changes nothing until you accept a preview.
 

@@ -174,7 +174,7 @@ function buildPrompt(prof: Profile, p: Perspective, draftPath: string, text: str
   }
   parts.push(`## Article context\n\n${contextForPrompt(context)}`);
   const cite = citationStyleNote(draftPath);
-  if (cite) parts.push(cite);
+  if (cite) parts.push(personalise(prof, cite));
   parts.push(`## Outline of the whole draft\n\n${outline(text)}`);
   if (dismissed.length) parts.push(`## Already resolved or dismissed by the writer (do not raise these again, in any wording)\n\n${dismissed.join("\n")}`);
 
@@ -202,7 +202,7 @@ export function citationStyleNote(draftPath: string): string | null {
   const st = readCiteState(draftPath);
   if (!st.style) return null;
   const done = st.formatted?.style === st.style ? ` Draftroom formatted the notes in this style on ${st.formatted.at.slice(0, 10)}.` : "";
-  return `## Citation style\n\nNick has chosen ${STYLE_NAME[st.style] ?? st.style}.${done} Judge notes against this style only: flag a note that lacks an element the style needs (author, title, date, publisher or web address) or departs from the style. Do not suggest another order or format.`;
+  return `## Citation style\n\n{{author.short}} has chosen ${STYLE_NAME[st.style] ?? st.style}.${done} Judge notes against this style only: flag a note that lacks an element the style needs (author, title, date, publisher or web address) or departs from the style. Do not suggest another order or format.`;
 }
 
 function mkRunDir(runId: string): string {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-10-03)
+
+- The citation style note sent to reviewers names the writer from the profile.
+
 ## 0.1.0 (2026-10-03)
 
 Initial public release.
