@@ -1,0 +1,9 @@
+#!/bin/bash
+# Launch Draftroom: `draftroom [file-or-folder]`.
+# Builds the client, starts the server on 127.0.0.1:8790 and opens the bootstrap URL.
+set -euo pipefail
+REPO="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+cd "$REPO"
+TARGET=""
+if [ $# -gt 0 ]; then TARGET="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"; fi
+exec npm run --silent start -- ${TARGET:+--open "$TARGET"}

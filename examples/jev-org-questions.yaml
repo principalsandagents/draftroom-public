@@ -1,0 +1,13 @@
+# Extra Jev questions for your own work, merged after the built-in set in
+# perspectives/jev-signals.yaml. Point jev_extra_questions in your profile at a copy.
+# Same fields as the built-in questions; keys must not repeat a built-in key.
+#
+# - key: org_position
+#   type: noul
+#   instructions: "The paragraph presents something as the organisation's view, finding or recommendation."
+#   flag: { above: 0.6 }
+#   should_at: 0.8
+#   title: Organisation position stated
+#   hint: Check it against the organisation's published positions (run Evidence on this paragraph).
+#   enabled: true
+[]

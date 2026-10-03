@@ -1,0 +1,37 @@
+{
+  "$id": "setup-output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "question",
+    "proposed_fields",
+    "done"
+  ],
+  "properties": {
+    "question": {
+      "type": "string"
+    },
+    "proposed_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "value"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "done": {
+      "type": "boolean"
+    }
+  }
+}

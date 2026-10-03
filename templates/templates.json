@@ -1,0 +1,5 @@
+{
+  "plain": "Plain (pandoc default: Calibri-style body, blue headings)",
+  "report": "Report (Arial 11, navy headings, 1.15 spacing)",
+  "essay": "Essay (Georgia 12, dark headings, 1.4 spacing)"
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#fff4f1"/>
+  <g transform="rotate(45 32 32)">
+    <!-- cap end -->
+    <rect x="26" y="4" width="12" height="9" rx="2.5" fill="#7f1d1d"/>
+    <!-- barrel -->
+    <rect x="26" y="12" width="12" height="30" fill="#dc2626"/>
+    <!-- clip highlight -->
+    <rect x="29" y="14" width="2.5" height="24" rx="1.2" fill="#fca5a5"/>
+    <!-- grip band -->
+    <rect x="26" y="40" width="12" height="4" fill="#7f1d1d"/>
+    <!-- nib -->
+    <path d="M26 44 L38 44 L32 58 Z" fill="#fde68a"/>
+    <path d="M30.2 52.5 L33.8 52.5 L32 58 Z" fill="#dc2626"/>
+  </g>
+  <!-- red ink stroke -->
+  <path d="M8 55 C 15 49, 20 58, 27 52" fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

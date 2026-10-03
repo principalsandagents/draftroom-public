@@ -1,0 +1,14 @@
+{
+  "summary": "The procurement claim is clear; one causal claim lacks support and the opening of section 1 circles before landing.",
+  "doc_points": [
+    {"title": "Close does not return to the claim", "rationale": "The reader finishes on the table and never hears why procurement matters more than policy.", "hint": "End on the key claim from the first section.", "severity": "consider", "level": "structure"}
+  ],
+  "comments": [
+    {"exact": "Voluntary guidance has changed board behaviour across the ASX 200.", "prefix": "the only document a vendor reads closely.\n\n", "suffix": " In an era of rapid", "title": "Causal claim without support", "rationale": "A director will ask what shows the guidance caused the change.", "hint": "Support the sentence starting 'Voluntary guidance has changed…' or narrow it to what you can show.", "severity": "should", "level": "argument", "kind": "direction", "links": [], "proposed_source": null},
+    {"exact": "Most Australian agencies now buy AI rather than build it.", "prefix": "## Why procurement matters\n\n", "suffix": " The contract is", "title": "Unsourced claim", "rationale": "'Most' needs a source.", "hint": "Add a source for the sentence starting 'Most Australian agencies now…'.", "severity": "should", "level": "argument", "kind": "check", "links": [], "proposed_source": {"source": "Survey of agency AI sourcing", "supports": "Share of agencies buying AI", "status": "missing"}},
+    {"exact": "In an era of rapid technological change, organisations face new questions", "prefix": "", "suffix": "", "title": "Scene-setting", "rationale": "The reader waits for the point.", "hint": "Rewrite as: Boards rarely change behaviour without enforcement and clear accountability for every outcome.", "severity": "should", "level": "sentence", "kind": "direction", "links": [], "proposed_source": null},
+    {"exact": "who owns the model's outputs once it is deployed?", "prefix": "", "suffix": "", "title": "Question needs an answer", "rationale": "The reader expects the author's view.", "hint": "Consider: boards rarely act without enforcement.", "severity": "consider", "level": "argument", "kind": "direction", "links": [], "proposed_source": null},
+    {"exact": "Procurement teams always read the contract twice before award.", "prefix": "", "suffix": "", "title": "Invented anchor", "rationale": "x", "hint": "Cut it.", "severity": "consider", "level": "argument", "kind": "direction", "links": [], "proposed_source": null},
+    {"exact": "The contract is therefore where obligations are set, and it is often the only document a vendor reads closely.", "prefix": "", "suffix": "", "title": "Strong point", "rationale": "This is the most concrete claim in the opening.", "hint": "Keep the sentence starting 'The contract is therefore where obligations are…' and move it first.", "severity": "consider", "level": "paragraph", "kind": "praise", "links": [], "proposed_source": null}
+  ]
+}

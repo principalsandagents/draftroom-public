@@ -1,0 +1,96 @@
+{
+  "$id": "context",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "op-ed",
+        "substack-take",
+        "field-notes",
+        "roundup",
+        "report-chapter",
+        "submission",
+        "speech",
+        "article",
+        "other"
+      ]
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "key_claim": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "reader_persona": {
+      "type": "string"
+    },
+    "sceptic": {
+      "type": "string"
+    },
+    "publication": {
+      "type": "string"
+    },
+    "voice": {
+      "type": "string"
+    },
+    "co_authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "length_target": {
+      "type": "integer"
+    },
+    "deadline": {
+      "type": "string"
+    },
+    "reference_folders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources_file": {
+      "type": "string"
+    },
+    "positions_relevant": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sensitivity": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "partnership",
+          "standards",
+          "paid-newsletters",
+          "embargo"
+        ]
+      }
+    },
+    "exemplars": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "frame": {
+      "type": "string"
+    }
+  }
+}

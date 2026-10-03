@@ -1,0 +1,244 @@
+{
+  "$id": "comment",
+  "type": "object",
+  "required": [
+    "id",
+    "perspective",
+    "engine",
+    "run_id",
+    "level",
+    "severity",
+    "kind",
+    "anchor",
+    "scope",
+    "title",
+    "rationale",
+    "hint",
+    "links",
+    "proposed_source",
+    "example",
+    "status",
+    "dismiss_reason",
+    "stale",
+    "flags",
+    "created"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "perspective": {
+      "type": "string"
+    },
+    "engine": {
+      "type": "string",
+      "enum": [
+        "claude",
+        "codex",
+        "lint",
+        "word",
+        "jev",
+        "cite"
+      ]
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "argument",
+        "structure",
+        "paragraph",
+        "sentence",
+        "mechanics"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "must",
+        "should",
+        "consider"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "question",
+        "observation",
+        "direction",
+        "check",
+        "praise"
+      ]
+    },
+    "anchor": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "exact",
+            "prefix",
+            "suffix",
+            "start",
+            "end",
+            "section",
+            "paragraph"
+          ],
+          "properties": {
+            "exact": {
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "suffix": {
+              "type": "string"
+            },
+            "start": {
+              "type": "integer"
+            },
+            "end": {
+              "type": "integer"
+            },
+            "section": {
+              "type": "string"
+            },
+            "paragraph": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "document",
+        "section",
+        "paragraph",
+        "selection",
+        "none"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "hint": {
+      "type": "string"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "target",
+          "why"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proposed_source": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "supports",
+            "status"
+          ],
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "supports": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "held",
+                "to verify",
+                "missing"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "example": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "example",
+            "principle"
+          ],
+          "properties": {
+            "example": {
+              "type": "string"
+            },
+            "principle": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "resolved",
+        "dismissed"
+      ]
+    },
+    "dismiss_reason": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "stale": {
+      "type": "boolean"
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "string"
+    }
+  }
+}

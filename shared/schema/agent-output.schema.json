@@ -1,0 +1,181 @@
+{
+  "$id": "agent-output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "summary",
+    "doc_points",
+    "comments"
+  ],
+  "properties": {
+    "summary": {
+      "type": "string"
+    },
+    "doc_points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "rationale",
+          "hint",
+          "severity",
+          "level"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "must",
+              "should",
+              "consider"
+            ]
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "argument",
+              "structure",
+              "paragraph",
+              "sentence",
+              "mechanics"
+            ]
+          }
+        }
+      }
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "exact",
+          "prefix",
+          "suffix",
+          "title",
+          "rationale",
+          "hint",
+          "severity",
+          "level",
+          "kind",
+          "links",
+          "proposed_source"
+        ],
+        "properties": {
+          "exact": {
+            "type": "string"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "must",
+              "should",
+              "consider"
+            ]
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "argument",
+              "structure",
+              "paragraph",
+              "sentence",
+              "mechanics"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "question",
+              "observation",
+              "direction",
+              "check",
+              "praise"
+            ]
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "target",
+                "why"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "why": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "proposed_source": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "source",
+                  "supports",
+                  "status"
+                ],
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "supports": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "held",
+                      "to verify",
+                      "missing"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

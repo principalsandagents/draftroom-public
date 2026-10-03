@@ -1,0 +1,15 @@
+node_modules/
+client/dist/
+.draftroom/
+*.log
+.DS_Store
+
+
+# The program folder is not a writing folder: stray drafts here are never committed.
+/*.md
+!/README.md
+!/AGENTS.md
+!/CLAUDE.md
+!/DRAFT-MATERIAL.md
+!/CHANGELOG.md
+release/.staging/

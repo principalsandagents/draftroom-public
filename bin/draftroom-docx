@@ -1,0 +1,13 @@
+#!/bin/bash
+# Word import and export without the editor:
+#   draftroom-docx import <file.docx> [--out <folder>] [--name <stem>]
+#   draftroom-docx export <draft.md> [--out <file.docx>] [--template report|essay|plain|<path.docx>]
+#                  [--notes as-labelled|footnotes|endnotes] [--comments none|word|all] [--scope body|all] [--no-title] [--overwrite]
+#   draftroom-docx templates
+set -euo pipefail
+REPO="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+ARGS=()
+for a in "$@"; do
+  if [ -e "$a" ] && [[ "$a" == */* || "$a" == *.md || "$a" == *.docx ]]; then ARGS+=("$(cd "$(dirname "$a")" && pwd)/$(basename "$a")"); else ARGS+=("$a"); fi
+done
+cd "$REPO" && exec ./node_modules/.bin/tsx scripts/docx.ts "${ARGS[@]}"

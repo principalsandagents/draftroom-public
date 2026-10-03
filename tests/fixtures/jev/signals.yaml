@@ -1,0 +1,137 @@
+# Jev signals: the questions Draftroom asks TypeSafe's Jev about each prose paragraph.
+#
+# Edit freely. Rules:
+# - Bump `version` whenever you change a question: cached answers and old dismissals then expire.
+# - Each question makes ONE judgement. Counting, sentence position and citation detection are done
+#   in code and given to Jev as facts in the state: paragraph, first_sentence, last_sentence,
+#   sentence_count, has_citation, audience, frame.
+# - title and hint are the card text. Jev never writes card text; it only returns numbers.
+# - flag: { above: p } or { below: p } for noul; { score_below: s } for score.
+#   should_at: the stronger threshold that raises severity from "consider" to "should".
+# - requires: state fields that must be non-empty (e.g. frame); min_sentences: skip short paragraphs.
+# - combine: no_citation  → flag only when the code found no citation in the paragraph.
+# - enabled: false switches a question off.
+version: 1
+model: jev-latest
+price_per_million_input: 0.042
+budget:
+  per_pass: 200
+  per_day: 3000
+  concurrency: 3
+trial:
+  graduate_after: 20
+  precision: 0.8
+  retire_below: 0.6
+questions:
+  - key: point_first
+    type: noul
+    instructions: "first_sentence states the paragraph's main claim, number or decision."
+    criteria:
+      "true": "The first sentence states the point the paragraph makes."
+      "false": "The first sentence gives background, sets a scene, or asks a question, and the point comes later."
+    # v2: first live check (2026-10-03, 9 test paragraphs) scored paragraphs that lead with
+    # their point at 0.13-0.27 and a late-point paragraph at 0.03, so the flag moved from 0.3 to 0.1.
+    flag: { below: 0.1 }
+    should_at: 0.05
+    title: Point comes late
+    hint: Lead with the claim or number.
+    enabled: true
+
+  - key: states_fact
+    type: noul
+    instructions: "The paragraph presents a specific figure, research finding or named fact as true."
+    combine: no_citation
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Fact without a source
+    hint: Add the source, or attribute the fact.
+    enabled: true
+
+  - key: unsupported_claim
+    type: noul
+    # v2: the v1 wording ("a broad or causal claim and gives no reason") scored 0.65-0.92 on almost
+    # every paragraph. Narrowed to explicit causal or sweeping conclusions.
+    instructions: "The paragraph draws a sweeping or causal conclusion (for example that something proves, causes or will inevitably lead to something) and gives no figure, example, source or reasoning for that conclusion."
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Claim without support
+    hint: Support the claim, or narrow it to what you can show.
+    # Off: in the v2 live check it still flagged 5 of 8 paragraphs that make no unsupported claim.
+    # Reword and test before switching on.
+    enabled: true
+
+  - key: closer_restates
+    type: noul
+    instructions: "last_sentence repeats the paragraph's point and adds no new information."
+    min_sentences: 3
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Closer repeats
+    hint: End the paragraph on information.
+    enabled: true
+
+  - key: over_hedged
+    type: noul
+    instructions: "The main claim is qualified so heavily that a reader cannot tell what is being asserted."
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Over-hedged
+    hint: Keep only the hedges the evidence needs.
+    enabled: true
+
+  - key: effect_line
+    type: noul
+    instructions: "A sentence is built for effect, such as a punchline, aphorism or slogan, and carries no information."
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Line built for effect
+    hint: State it plainly, or cut it.
+    enabled: true
+
+  - key: abstract_actor
+    type: noul
+    instructions: "The paragraph says a technology, trend or abstraction does something that, in fact, people or organisations do."
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Abstraction as actor
+    hint: Name the people or organisations who act.
+    enabled: true
+
+  - key: contrast_frame
+    type: noul
+    instructions: "The paragraph makes its point by first rejecting an alternative description and then giving the preferred one."
+    flag: { above: 0.7 }
+    should_at: 0.9
+    title: Contrast frame
+    hint: Keep only the positive claim.
+    enabled: true
+
+  - key: audience_fit
+    type: score
+    instructions: "How well is the paragraph pitched for the audience given in the state?"
+    criteria:
+      - "Uses terms or assumes knowledge this audience lacks, without explaining them."
+      - "Mostly fits; one or two terms need a short gloss for this audience."
+      - "Fits this audience throughout."
+    requires: [audience]
+    flag: { score_below: 1.0 }
+    should_at: 0.3
+    title: Pitch for the audience
+    hint: Explain or replace the terms this reader lacks.
+    enabled: true
+
+  - key: frame_fit
+    type: score
+    instructions: "How well do the paragraph's examples, institutions and laws fit the frame given in the state?"
+    # v2: added the "nothing jurisdiction-specific" case to the top level; v1 marked general
+    # paragraphs as outside the frame.
+    criteria:
+      - "Rests on another jurisdiction's laws, institutions or examples with no link back to the frame."
+      - "Partly fits; a comparator from elsewhere is used without saying why."
+      - "Fits the frame, uses comparators the frame allows, or mentions no jurisdiction, law or institution at all."
+    requires: [frame]
+    flag: { score_below: 1.0 }
+    should_at: 0.3
+    title: Outside the frame
+    hint: Tie the example to your frame, or mark it as a comparator.
+    enabled: true

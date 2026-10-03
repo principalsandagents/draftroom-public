@@ -1,0 +1,68 @@
+# Example profile. Copy it to profiles/<you>.yaml, edit, and Draftroom loads it
+# (or set DRAFTROOM_PROFILE, or put a profile name or path in ~/.draftroom/profile).
+# Relative paths resolve against this file's folder; ~ is your home folder.
+name: Example writer
+
+# Who the reviewers work for. Prompts read these through {{author.*}} tokens.
+author:
+  name: Sam Writer                 # replace with your name
+  short: Sam                       # how reviewers refer to you
+  description: "essayist"          # one line on your role; may be empty
+  org: Example Institute           # your organisation, for positions checks
+  spelling: Australian
+
+# Context tab voice options; frontmatter `project` values that pre-fill publication and voice.
+voices:
+  - { key: personal, label: Personal }
+  - { key: institutional, label: Institutional }
+  - { key: co-authored, label: Co-authored }
+publications: {}
+
+python: python3
+
+# Text injected into prompts. Each perspective lists which keys it needs.
+files:
+  voice_card:
+    path: ../examples/voice-card.md
+  style_guide:
+    path: ../examples/style-guide.md
+  tells_catalogue:
+    path: ../examples/tells-catalogue.md
+  line_brief:
+    path: ../examples/line-brief.md
+  standing_positions:
+    path: ../examples/standing-positions.md
+    section: "## Standing positions you bring to any draft"
+
+# Optional. Leave unset to switch the feature off.
+# tell_lint: path/to/lint-script.py      # Lint perspective (see README)
+# positions_dir: path/to/positions/      # Evidence: your organisation's approved positions
+# jev_extra_questions: ../examples/jev-org-questions.yaml
+# contact_email: you@example.org         # sent only to Crossref, OpenAlex and Unpaywall
+# library_dir: ~/Documents/Draftroom/library   # default ~/.draftroom/library
+
+exemplars: []
+
+# Every path Draftroom reads or hands to a model must resolve under one of these.
+allowed_roots:
+  - ~/Documents
+
+# Where New starts, and Import when no draft is open.
+new_drafts_dir: ~/Documents/Draftroom
+
+# Drafts may be opened and saved under this root only.
+drafts_root: ~/Documents
+
+# Never readable through Draftroom, never handed to a model run as a folder.
+denied_paths:
+  - ~/.ssh
+  - ~/.draftroom
+
+# Cited but never fetched: paid newsletters and standards stores.
+cite_denied_domains:
+  - iso.org
+  - iec.ch
+  - standards.org.au
+  - store.standards.org.au
+  - saiglobal.com
+  - techstreet.com

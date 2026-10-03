@@ -1,0 +1,17 @@
+{
+  "$id": "example-output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "example",
+    "principle"
+  ],
+  "properties": {
+    "example": {
+      "type": "string"
+    },
+    "principle": {
+      "type": "string"
+    }
+  }
+}
